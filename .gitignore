@@ -1,0 +1,71 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+*/.venv/
+*/venv/
+*/env/
+.virtualenv/
+venv*/
+
+# =========================
+# Training / experiment artifacts
+# =========================
+logs/
+checkpoints/
+*.log
+*.tmp
+*.bak
+*.pid
+
+# TensorBoard
+**/tensorboard/
+**/events.out.tfevents.*
+
+# Model binaries / large artifacts
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.h5
+*.zip
+
+# =========================
+# Godot generated files
+# =========================
+.godot/
+.import/
+*.translation
+mono_crash.*.json
+
+# =========================
+# Editor / OS
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# =========================
+# Build artifacts
+# =========================
+build/
+dist/
