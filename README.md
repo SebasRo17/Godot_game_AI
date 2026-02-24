@@ -1,0 +1,104 @@
+# Proyecto Mateo - RL + Godot (Speedrun)
+
+Repositorio con un juego en Godot y scripts en Python para entrenar y evaluar un agente de aprendizaje por refuerzo (PPO con LSTM), además de utilidades de inferencia y métricas.
+
+## Contenido principal
+- `train_ppo_mateo.py`: entrenamiento PPO (RecurrentPPO LSTM) con `SubprocVecEnv`.
+- `godot_gym_env.py`: entorno Gym que habla por TCP con Godot.
+- `eval_metrics_godot.py`: evaluación de episodios y métricas (guarda CSV al final).
+- `eval_metrics_godot_livecsv.py`: igual, pero guarda CSV por episodio.
+- `eval_multiagent_livecsv.py`: evaluación multiagente con logging a CSV por episodio.
+- `inference_server.py`: servidor de inferencia (usa un modelo JSON simple).
+- `godot_server.py`: servidor de prueba con acciones aleatorias (debug protocolo).
+- `debug_ports.py`: prueba de puertos múltiples (8 instancias).
+- `speedrun_agent.py`: entrenamiento de un modelo simple (sin ML libs, solo stdlib).
+
+## Estructura de carpetas
+- `Godot_Game_IA\proyecto-final`: proyecto Godot (escena principal en `Levels/DemoLevel.tscn`).
+- `checkpoints`: modelos PPO y estadísticas de normalización (`ppo_speedrun_latest.zip`, `vecnormalize.pkl`).
+- `models`: modelos JSON para inferencia simple.
+- `logs`: registros locales de entrenamiento/ejecución (si se usan).
+- `venv`: entorno virtual local (no versionar ni mover a otra máquina).
+- `AI-VideoGames`: copias de algunos scripts (no necesarias para el flujo principal).
+
+## Tecnologías
+- Godot Engine (proyecto 2D)
+- Python 3.x
+- `stable-baselines3`
+- `sb3-contrib` (RecurrentPPO)
+- `gymnasium`
+- `numpy`
+
+## Instalación
+1. Instala Python 3.x.
+2. Crea y activa un entorno virtual.
+3. Instala dependencias:
+
+```bash
+pip install stable-baselines3 sb3-contrib gymnasium numpy
+```
+
+Nota: no hay `requirements.txt` en la raíz, por eso se instala manualmente.
+
+## Uso rápido
+
+### 1) Entrenamiento PPO (principal)
+Ejecuta el entrenamiento con 8 entornos paralelos:
+
+```bash
+python train_ppo_mateo.py
+```
+
+El script espera 8 instancias de Godot escuchando en puertos `11008..11015`.
+
+### 2) Métricas (single-agent)
+```bash
+python eval_metrics_godot.py
+```
+Guarda `eval_metrics.csv` al final.
+
+### 3) Métricas con guardado en vivo
+```bash
+python eval_metrics_godot_livecsv.py
+```
+
+### 4) Métricas multi-agente
+```bash
+python eval_multiagent_livecsv.py
+```
+
+### 5) Inferencia (modelo JSON simple)
+```bash
+python inference_server.py --host 127.0.0.1 --port 11009 --model models/demo_speedrun_model.json
+```
+
+### 6) Debug de protocolo
+```bash
+python godot_server.py
+```
+
+### 7) Debug de puertos
+```bash
+python debug_ports.py
+```
+
+## Puertos y red
+- Los scripts usan TCP en `127.0.0.1`.
+- Entrenamiento PPO usa `11008..11015` (8 entornos).
+- Ajusta puertos si ejecutas menos instancias.
+
+## Godot
+- Proyecto ubicado en `Godot_Game_IA\proyecto-final`.
+- Escena principal: `Levels/DemoLevel.tscn`.
+- Incluye `addons/godot_rl_agents` para la comunicación por TCP.
+
+## Notas
+- `speedrun_agent.py` entrena un modelo simple (no PPO) y guarda JSON.
+- `AI-VideoGames` contiene copias de scripts; no es parte del flujo principal.
+- `checkpoints` y `models` se generan/actualizan al entrenar o inferir.
+
+## Troubleshooting rápido
+- Si el entrenamiento se queda esperando: inicia las instancias de Godot antes de correr `train_ppo_mateo.py`.
+- Si hay errores de puerto en uso: cambia el rango en `train_ppo_mateo.py` o cierra procesos.
+- Si los resultados no mejoran: revisa recompensas en el proyecto Godot.
+# Godot_game_AI
