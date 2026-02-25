@@ -43,7 +43,6 @@ checkpoints/
 *.pth
 *.onnx
 *.h5
-*.zip
 
 # =========================
 # Godot generated files
