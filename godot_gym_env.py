@@ -260,8 +260,8 @@ class GodotPlatformerEnv(gym.Env):
             self.conn,
             {
                 "type": "call",
-                "path": "/root/DemoLevel/CanvasLayer",
-                "method": "set_ai_enabled",
+                "path": "/root/DemoLevel/Sync",
+                "method": "set_training_enabled",
                 "args": [True],
             },
         )
