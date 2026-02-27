@@ -28,7 +28,7 @@ def make_env(rank: int, base_port=11008):
         env = GodotPlatformerEnv(
             host="127.0.0.1",
             port=base_port + rank,
-            timeout_s=10.0,
+            timeout_s=60.0,
             verbose=False
         )
         env = Monitor(env)
@@ -39,7 +39,7 @@ def make_env(rank: int, base_port=11008):
 def main():
     print("START main()")
 
-    NUM_ENVS = 8
+    NUM_ENVS = 4
     print("Creating SubprocVecEnv...")
     env = SubprocVecEnv([make_env(i) for i in range(NUM_ENVS)])
     print("SubprocVecEnv created")
@@ -77,8 +77,8 @@ def main():
             policy="MlpLstmPolicy",
             env=env,
             verbose=1,
-            n_steps=256,
-            batch_size=1024,
+            n_steps=128,
+            batch_size=512,
             learning_rate=3e-4,
             gamma=0.997,
             clip_range=0.2,
