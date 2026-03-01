@@ -121,13 +121,6 @@ python export_onnx_speedrun.py --model ppo_speedrun_latest --out /c/Users/roble/
 - Modelos simples: `models/*.json`
 - ONNX: `models/ppo_speedrun_latest.onnx`
 
-## Consideraciones para el informe
-- Describir el entorno y el objetivo del agente.
-- Justificar el uso de PPO + LSTM (observaciones parciales y estabilidad).
-- Explicar la comunicación TCP y el framing (u32 + JSON).
-- Reportar métricas: retorno promedio, pasos, distribución de acciones.
-- Incluir configuración de entrenamiento (n_steps, batch_size, gamma, clip_range).
-
 ## Troubleshooting
 - Si el entrenamiento se queda esperando: iniciar primero las instancias de Godot.
 - Si hay error de puerto: ajustar rango o cerrar procesos.
